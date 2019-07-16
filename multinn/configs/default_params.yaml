@@ -1,0 +1,13 @@
+mode: composer  # `joint`, `composer`, `jamming`, `feedback`, or `feedback-rnn`
+tune_encoder: False  # set to False to fix the weights of encoders while training the generators
+keep_prob: 0.9  # rnn dropout keep probability
+
+encoder:
+  type: Pass  # `Pass`, `DBM`, or `DBN`
+  num_hidden: ~  # number of units for each encoder, e.g. [168, 84]
+
+generator:
+  type: NADE  # `NADE`, or `RBM`
+  num_hidden: 256  # number of units for the distribution estimator
+  num_hidden_rnn: [512, 256]  # number of units for rnn layers
+  feedback: ~  # number of hidden units for the feedback module, e.g. [128, 128]

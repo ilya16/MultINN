@@ -1,0 +1,57 @@
+# Experiment
+logs:
+  log_loss_steps: 8  # set to 0 to disable loss logging
+  log_weights_steps: 10000  # set to 0 to disable weights logging
+  log_gradients_steps: 0  # set to 0 to disable gradients logging
+  evaluate_epochs: 1  # set to 0 to disable evaluation
+  generate_epochs: 1  # set to 0 to disable generation
+  save_graph: False  # set to False to omit saving the model's graph
+  save_samples_epochs: 1  # set to 0 to disable saving samples
+  save_checkpoint_epochs: 1  # set to 0 to disable saving checkpoints
+
+# Data
+data:
+  source: 'npy'  # 'sa', 'npy', 'npz', 'dir'
+  filename: ../../data/X_train_all
+  sequence_lengths: ~
+  beat_resolution: 12  # number of time steps used to represent a beat
+  pitch_range:
+    lowest: 24
+    highest: 108
+  instruments: [Drums, Piano, Guitar , Bass, Strings]
+  programs: [0, 0, 24, 32, 48]
+  is_drums: [True, False, False, False, False]
+  tempo: 120  # in bpm
+  split:
+    num_train: 32000
+    num_valid: 4000
+    num_test: 4000
+
+# Training
+training:
+  random_seed: 23
+  epochs: 20
+  batch_size: 32
+  num_pixels: 3  # number of pixels to transpose the data
+  piece_size: 16  # length of training data samples in beats
+  early_stopping: 5
+  learning_rate: 0.01
+  clip_norm: 5.
+
+# Sampling
+sampling:
+  num_songs: 3  # number of songs to generate for each intro song
+  intro_beats: 8
+  intro_ids:
+    train:
+      start: 0
+      end: 16
+    valid:
+      start: 0
+      end: 8
+  sample_beats: 88  # number of beats to generate generate
+  save_ids:
+    train: [0, 1, 3, 5, 6, 7]
+    valid: [0, 2]
+  num_save: 2  # number of samples to save for each `save_id`
+

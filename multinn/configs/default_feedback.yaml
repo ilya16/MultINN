@@ -1,0 +1,13 @@
+mode: feedback
+tune_encoder: False
+keep_prob: 0.9
+
+encoder:
+  type: Pass
+  num_hidden: ~
+
+generator:
+  type: NADE
+  num_hidden: 256
+  num_hidden_rnn: [256, 256]
+  feedback: 128
